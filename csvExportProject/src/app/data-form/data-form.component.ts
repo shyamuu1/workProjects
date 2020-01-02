@@ -24,9 +24,9 @@ export class DataFormComponent implements OnInit {
     // add it to the list
     this.addData(value);
     // convert to csv
-    let csv = this.es.convertToCSV();
+    let csv = this.es.getCSVFile();
     // dowload csv to browser
-    //this.es.downloadBlob(csv);
+    this.es.downloadBlob(csv);
   }
   getObjectMap() {
     return this.es.convertObjectToMap();
