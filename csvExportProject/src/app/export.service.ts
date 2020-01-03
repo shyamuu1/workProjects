@@ -1,79 +1,73 @@
 import { Injectable } from '@angular/core';
 import { Data } from './data';
+import { DUMMYDATA } from './constans';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportService {
   ObjMap = new Map();
-  models: Data[] = [
-    {
-      id: 1,
-      fullname: 'Shyam Vasanjee',
-      initials: 'INYSHKV',
-      title: 'Developer'
-
-    },
-    {
-      id: 2,
-      fullname: "John Doe",
-      initials: 'INYJODO',
-      title: 'Sales',
-    }
-  ];
   constructor() { }
   //gets dummy data
   getData(): Data[] {
-    return this.models;
+    return DUMMYDATA;
   }
   //convert Object into Map
-  convertObjectToMap() {
-    let ObjKVArray = [];
-    for (const model of this.models) {
-      ObjKVArray = Object.entries(model);
-      for (const [key, value] of ObjKVArray) {
-        this.ObjMap.set(key, value);
-        //console.log("Key: " + key + " Values: " + value);
-      }
+  // convertObjectToMap() {
+  //   let ObjKVArray = [];
+  //   for (const model of this.models) {
+  //     ObjKVArray = Object.entries(model);
+  //     for (const [key, value] of ObjKVArray) {
+  //       this.ObjMap.set(key, value);
+  //     }
+  //   }
+  //   return this.ObjMap;
+  // }
+  convertObjValuesToArray(models) {
+    let values = []; 
+    for (const model of models) {
+      values.push(Object.values(model));
     }
-    return this.ObjMap;
+    return values;
   }
   //Build Columns
-  buildColumns() {
+  buildColumns(models) {
     let headers;
-    let obj = this.ObjMap;
-    let header = Array.from(obj.keys());
+    let header = Object.keys(models[0]);
     headers = header.join(',');
-    console.log(headers);
     return headers;
   }
   //Build Cells
-  buildCells(){
-    let obj = this.ObjMap;
-    let header = Array.from(obj.keys());
+  buildCells(models) {
+    let header = Object.keys(models[0]);
+    let cell = this.convertObjValuesToArray(models);
     let cells = "";
-    let cell = Array.from(obj.values());
-    cells= cell.join(",");
+
     cell.forEach(row => {
+      cells += row + ",";
       header.forEach(ele => {
-        console.table("Row Value: "+row, "Element Value: "+ele);
+        if (ele === "title") {
+          cells += "\n";
+        }
+        console.log("Row Value: " + row + " | " + "Element Value: " + ele);
       });
-      console.log("Cells: "+cells);
+      console.log("Cells: " + cells);
     });
     return cells;
   }
   //Creates CSVFile
-  getCSVFile(){
-    let columns = this.buildColumns();
-    let cells = this.buildCells();
+  getCSVFile(models) {
+    let columns = this.buildColumns(models);
+    let cells = this.buildCells(models);
     let newLine = "\n";
-    let CSVFile = "".concat(columns, newLine, cells, newLine);
-    console.log("File: "+CSVFile);
+    let CSVFile = "".concat(columns, newLine, cells);
+    console.log("File: " + CSVFile);
     return CSVFile;
   }
   //Dowload function for CSVFile
-  downloadBlob(csvFile) {
+  downloadBlob(models) {
     let filename = "Form Results.csv";
+    let csvFile = this.getCSVFile(models);
     let blob = new Blob([csvFile], { type: 'text/csv' });
     let flyLink = document.createElement("a");
     let URL = window.URL;

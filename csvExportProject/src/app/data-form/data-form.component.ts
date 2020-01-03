@@ -12,29 +12,32 @@ export class DataFormComponent implements OnInit {
   titles = ["Developer", "Data Analytics", "Sales"];
   model: Data;
   submitted = false;
+  objectMap = new Map();
 
   constructor(private es: ExportService) { }
 
   ngOnInit() {
-    this.getObjectMap();
     this.fillDataArray();
+    this.model = this.dataArray[0];
   }
   onSubmit(value) {
     this.submitted = true;
     // add it to the list
-    this.addData(value);
+    //this.addData(value);
     // convert to csv
-    let csv = this.es.getCSVFile();
     // dowload csv to browser
-    this.es.downloadBlob(csv);
+    this.es.downloadBlob(this.dataArray);
   }
-  getObjectMap() {
-    return this.es.convertObjectToMap();
-  }
-  fillDataArray(): void {
-    let datas = this.es.getData();
-    this.dataArray = datas;
-    this.model = datas[0];
+  // getObjectMap() {
+  //   let OMap = this.objectMap;
+  //   OMap= this.es.convertObjectToMap();
+  //   console.table([OMap]);
+  //   return OMap;
+  // }
+  fillDataArray() {
+    this.dataArray = this.es.getData();
+    return this.dataArray;
+    
   }
   addData(value) {
     let fullname;
