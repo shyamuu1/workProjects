@@ -9,8 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./data-form.component.css']
 })
 export class DataFormComponent implements OnInit {
-  dataArray: Data[] = [];
-  usersArray: Data[] = [];
+  users:Data[] = [];
   titles = ["Developer", "Data Analytics", "Sales"];
   model: Data;
   submitted = false;
@@ -19,45 +18,30 @@ export class DataFormComponent implements OnInit {
   constructor(private es: ExportService, private us: UserService) { }
 
   ngOnInit() {
-    //this.fillDataArray();
     this.us.findAll().subscribe(data => {
-      this.dataArray = data;
+      this.users = data;
     });
     //this.model = this.dataArray[0];
   }
+  
   onSubmit(value) {
     this.submitted = true;
-    // add it to the list
     this.addData(value);
-    // convert to csv
-    // dowload csv to browser
-
   }
-  // getObjectMap() {
-  //   let OMap = this.objectMap;
-  //   OMap= this.es.convertObjectToMap();
-  //   console.table([OMap]);
-  //   return OMap;
-  // }
-  fillDataArray() {
-    this.dataArray = this.es.getData();
-    console.table(this.dataArray);
-    return this.dataArray;
 
-  }
   addData(value) {
-    let id: number = this.dataArray.length +1;
+    let id: number = this.users.length +1;
     let valid: boolean = false;
     let newData: Data = new Data(id, value.fullname, value.initials.toUpperCase(), value.title);
-    this.dataArray.forEach(user => {
-      if (newData.id == user.id || newData.initials == user.initials) {
+    this.users.forEach(user => {
+      if (newData.initials == user.initials) {
         valid = true;
       }
     });
     if (!valid) {
-      this.dataArray.push(newData);
+      this.users.push(newData);
     }
-    this.es.downloadBlob(this.dataArray);
+    this.es.downloadBlob(this.users);
 
   }
 
