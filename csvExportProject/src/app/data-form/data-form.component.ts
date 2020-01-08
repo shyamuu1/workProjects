@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Data } from '../data';
 import { ExportService } from '../export.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-data-form',
@@ -9,24 +10,28 @@ import { ExportService } from '../export.service';
 })
 export class DataFormComponent implements OnInit {
   dataArray: Data[] = [];
+  usersArray: Data[] = [];
   titles = ["Developer", "Data Analytics", "Sales"];
   model: Data;
   submitted = false;
   objectMap = new Map();
 
-  constructor(private es: ExportService) { }
+  constructor(private es: ExportService, private us: UserService) { }
 
   ngOnInit() {
-    this.fillDataArray();
-    this.model = this.dataArray[0];
+    //this.fillDataArray();
+    this.us.findAll().subscribe(data => {
+      this.dataArray = data;
+    });
+    //this.model = this.dataArray[0];
   }
   onSubmit(value) {
     this.submitted = true;
     // add it to the list
-    //this.addData(value);
+    this.addData(value);
     // convert to csv
     // dowload csv to browser
-    this.es.downloadBlob(this.dataArray);
+
   }
   // getObjectMap() {
   //   let OMap = this.objectMap;
@@ -36,19 +41,24 @@ export class DataFormComponent implements OnInit {
   // }
   fillDataArray() {
     this.dataArray = this.es.getData();
+    console.table(this.dataArray);
     return this.dataArray;
-    
+
   }
   addData(value) {
-    let fullname;
-    let id = this.dataArray.length + 1;
-    fullname = value.fullname;
-    let initials = value.initials;
-    let title = value.title;
-    let newData = new Data(id, fullname, initials, title);
-    if (newData.initials !== this.model.initials) {
+    let id: number = this.dataArray.length +1;
+    let valid: boolean = false;
+    let newData: Data = new Data(id, value.fullname, value.initials.toUpperCase(), value.title);
+    this.dataArray.forEach(user => {
+      if (newData.id == user.id || newData.initials == user.initials) {
+        valid = true;
+      }
+    });
+    if (!valid) {
       this.dataArray.push(newData);
     }
+    this.es.downloadBlob(this.dataArray);
+
   }
 
 }
