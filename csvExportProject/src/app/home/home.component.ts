@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DUMMYDATA } from '../constans';
+import { Data } from '../data';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  displayColumns: string[]=[
+    'fullname',
+    'initials',
+    'title'
+  ];
+  users: Data[] = DUMMYDATA;
+
   constructor() { }
 
   ngOnInit() {
+    this.users;
   }
 
 }

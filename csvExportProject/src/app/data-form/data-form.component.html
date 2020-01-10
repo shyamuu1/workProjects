@@ -1,9 +1,5 @@
 <!-- <div class="container"> -->
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>User Form</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<h1>User Form</h1>
 <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
         <input matInput placeholder="Name" formControlName="fullname">

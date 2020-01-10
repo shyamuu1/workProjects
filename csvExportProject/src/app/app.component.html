@@ -12,7 +12,10 @@
             </li>
         </ul>
     </mat-sidenav>
-    <div id="content">
-        <router-outlet></router-outlet>
-    </div>
+    <mat-sidenav-content>
+        <app-top-bar></app-top-bar>
+        <div id="content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>
