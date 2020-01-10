@@ -1,55 +1,44 @@
-<p>data-form works!</p>
-<div class="container">
-    <div>
-        <h1>User Form</h1>
-        <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
-            <mat-form-field>
-                <input matInput placeholder="Name" formControlName="fullname">
-                <mat-error *ngIf="dataForm.controls.fullname?.errors &&
+<!-- <div class="container"> -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>User Form</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input matInput placeholder="Name" formControlName="fullname">
+        <mat-error *ngIf="dataForm.controls.fullname?.errors &&
                 (dataForm.controls.fullname?.dirty || dataForm.controls.fullname?.touched)">
-                    <div *ngIf="dataForm.controls.fullname?.errors.required">
-                        Full name is required
-                    </div>
-                </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <input matInput placeholder="Initials" formControlName="initials">
-                <mat-error *ngIf="dataForm.controls.initals?.errors &&
+            <div *ngIf="dataForm.controls.fullname?.errors.required">
+                Full name is required
+            </div>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder="Initials" formControlName="initials">
+        <mat-error *ngIf="dataForm.controls.initals?.errors &&
                 (dataForm.controls.initials?.dirty || dataForm.controls.initials?.touched)">
-                    <div *ngIf="dataForm.controls.initials?.errors.required">
-                        Initials are required
-                    </div>
-                </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-label>Title</mat-label>
-                <mat-select matInput formControlName="jobTitle">
-                    <mat-option *ngFor="let title of titles" [value]="title">{{title}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="dataForm.controls.jobTitle?.errors &&
+            <div *ngIf="dataForm.controls.initials?.errors.required">
+                Initials are required
+            </div>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <mat-select matInput formControlName="jobTitle">
+            <mat-option *ngFor="let title of titles" [value]="title">{{title}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="dataForm.controls.jobTitle?.errors &&
                 (dataForm.controls.jobTitle?.dirty || dataForm.controls.jobTitle?.touched)">
-                    <div *ngIf="dataForm.controls.jobTitle?.errors.required">
-                        Choose Title
-                    </div>
-                </mat-error>
-            </mat-form-field>
-            <br>
-            <!-- 
-            <div class="form-group">
-                <label for="title">Title</label>
-                <select class="form-control" id="title" value="value" required ngModel name="title" #title="ngModel">
-                    <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
-                        Title Selection is required
-                    </div>
-            <option *ngFor="let title of titles" [value]="title">{{title}}</option>
-          </select>
-
-            </div> -->
-
-            <button type="submit" class="btn btn-success" [disabled]="!dataForm.valid">Submit</button>
-            <!-- <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
-        </form>
-    </div>
-</div>
+            <div *ngIf="dataForm.controls.jobTitle?.errors.required">
+                Choose Title
+            </div>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <button type="submit" class="btn btn-success" [disabled]="!dataForm.valid">Submit</button>
+    <!-- <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
+</form>
+<!-- </div> -->
