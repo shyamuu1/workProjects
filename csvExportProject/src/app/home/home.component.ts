@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DUMMYDATA } from '../constans';
 import { Data } from '../data';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +15,15 @@ export class HomeComponent implements OnInit {
     'initials',
     'title'
   ];
-  users: Data[] = DUMMYDATA;
+  users: Data[];
 
-  constructor() { }
+  constructor(private us:UserService) { }
 
   ngOnInit() {
-    this.users;
+    this.us.findAll().subscribe(data => {
+      this.users = data;
+    });
+  
   }
 
 }

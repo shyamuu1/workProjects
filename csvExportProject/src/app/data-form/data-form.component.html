@@ -2,7 +2,7 @@
 <h1>User Form</h1>
 <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-        <input matInput placeholder="Name" formControlName="fullname">
+        <input matInput placeholder="Enter Name" formControlName="fullname">
         <mat-error *ngIf="dataForm.controls.fullname?.errors &&
                 (dataForm.controls.fullname?.dirty || dataForm.controls.fullname?.touched)">
             <div *ngIf="dataForm.controls.fullname?.errors.required">
@@ -12,7 +12,7 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-        <input matInput placeholder="Initials" formControlName="initials">
+        <input matInput placeholder="Enter Initials" formControlName="initials">
         <mat-error *ngIf="dataForm.controls.initals?.errors &&
                 (dataForm.controls.initials?.dirty || dataForm.controls.initials?.touched)">
             <div *ngIf="dataForm.controls.initials?.errors.required">

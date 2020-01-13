@@ -16,5 +16,18 @@ private userUrl: string;
     return this.http.get<Data[]>(this.userUrl);
   }
 
+  public save(user: Data){
+    return this.http.post<Data>(this.userUrl, user);
+  }
+
+  public update(user: Data){
+    return this.http.put(this.userUrl, user);
+  }
+
+  public deleteUser(user:Data){
+    const id = user.id;
+    return this.http.post<Data>(this.userUrl+`/${id}`, user);
+  }
+
 
 }

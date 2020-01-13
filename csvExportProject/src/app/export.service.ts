@@ -23,7 +23,7 @@ export class ExportService {
   //   }
   //   return this.ObjMap;
   // }
-  convertObjValuesToArray(models) {
+  convertObjValuesToArray(models:Data[]) {
     let values = []; 
     for (const model of models) {
       values.push(Object.values(model));
@@ -31,14 +31,14 @@ export class ExportService {
     return values;
   }
   //Build Columns
-  buildColumns(models) {
+  buildColumns(models:Data[]) {
     let headers;
     let header = Object.keys(models[0]);
     headers = header.join(',');
     return headers;
   }
   //Build Cells
-  buildCells(models) {
+  buildCells(models:Data[]) {
     let header = Object.keys(models[0]);
     let cell = this.convertObjValuesToArray(models);
     let cells = "";
@@ -56,7 +56,7 @@ export class ExportService {
     return cells;
   }
   //Creates CSVFile
-  getCSVFile(models) {
+  getCSVFile(models:Data[]) {
     let columns = this.buildColumns(models);
     let cells = this.buildCells(models);
     let newLine = "\n";
@@ -65,7 +65,7 @@ export class ExportService {
     return CSVFile;
   }
   //Dowload function for CSVFile
-  downloadBlob(models) {
+  downloadBlob(models:Data[]) {
     let filename = "Form Results.csv";
     let csvFile = this.getCSVFile(models);
     let blob = new Blob([csvFile], { type: 'text/csv' });

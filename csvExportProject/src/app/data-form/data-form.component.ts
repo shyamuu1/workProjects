@@ -15,7 +15,8 @@ export class DataFormComponent implements OnInit {
   model: Data;
   submitted = false;
 
-  constructor(private es: ExportService, private us: UserService) { }
+  constructor(private es: ExportService, private us: UserService) { 
+  }
   dataForm =  new FormGroup({
     fullname: new FormControl('',Validators.required),
     initials: new FormControl('', Validators.required),
@@ -44,6 +45,7 @@ export class DataFormComponent implements OnInit {
       }
     });
     if (!valid) {
+      this.us.save(newData).subscribe( result => this.users.push(result));
       this.users.push(newData);
     }
     this.es.downloadBlob(this.users);
