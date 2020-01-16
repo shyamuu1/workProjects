@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Data } from './data';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,11 @@ private userUrl: string;
     this.userUrl = "http://localhost:8080/users";
   }
 
-  public findAll(): Observable<Data[]> {
-    return this.http.get<Data[]>(this.userUrl);
+  private parseData(res:Response){
+    return res.json() || [];
+  }
+  public findAll(): Observable<any> {
+    return this.http.get(this.userUrl);
   }
 
   public save(user: Data){
@@ -24,9 +28,8 @@ private userUrl: string;
     return this.http.put(this.userUrl, user);
   }
 
-  public deleteUser(user:Data){
-    const id = user.id;
-    return this.http.post<Data>(this.userUrl+`/${id}`, user);
+  public deleteUser(id:number){
+    return this.http.delete<Data>(this.userUrl+`/${id}`);
   }
 
 

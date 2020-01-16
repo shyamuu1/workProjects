@@ -10,12 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 @NgModule({
   declarations: [
     AppComponent,
     DataFormComponent,
     HomeComponent,
-    TopBarComponent
+    TopBarComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

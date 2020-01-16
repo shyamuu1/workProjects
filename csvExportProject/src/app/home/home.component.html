@@ -13,6 +13,13 @@
             <th mat-header-cell *matHeaderCellDef>Title</th>
             <td mat-cell *matCellDef="let u">{{u.title}}</td>
         </ng-container>
+        <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let u" class="action-link">
+                <button mat-raised-button (click)="updateUser(u.id, u)" style="margin: 5px">EDIT</button>
+                <button mat-raised-button (click)="deleteUser(u.id)" style="margin: 5px">DELETE</button>
+            </td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
     </table>

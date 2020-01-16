@@ -1,0 +1,21 @@
+<h3>Update Details</h3>
+<div>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="fullname" required [(ngModel)]="user.fullname" name="fullname">
+        </div>
+        <div class="form-group">
+            <label for="initials">Initials</label>
+            <input type="text" class="form-control" id="initials" required [(ngModel)]="user.initials" name="initials">
+        </div>
+        <div class="form-group">
+            <label for="name">Title</label>
+            <select type="text" class="form-control" id="title" required [(ngModel)]="user.title" name="title">
+                <option *ngFor="let title of titles" [value] = "title">{{title}}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-btn-success">Update</button>
+
+    </form>
+</div>

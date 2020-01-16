@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Table(name="users")
 @Entity
-public class User {
+public class Data {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private  long id;
@@ -16,12 +16,12 @@ public class User {
 	private String title;
 	
 	//No args Constructor
-	public User() {
+	public Data() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	//Constructor with arguments
-	public User(long id, String fullname, String initials, String title) {
+	public Data(long id, String fullname, String initials, String title) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
