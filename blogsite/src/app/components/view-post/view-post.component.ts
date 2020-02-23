@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostModel } from 'src/app/models/post-model';
 import { PostalService } from 'src/app/services/postal.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./view-post.component.css']
 })
 export class ViewPostComponent implements OnInit {
+  mySubscription: any;
   Posts: PostModel[];
   form = new FormGroup({
     newerPost: new FormGroup({
@@ -18,7 +20,7 @@ export class ViewPostComponent implements OnInit {
     })
 
   })
-  constructor(private ups: PostalService) { }
+  constructor(private router:Router, private ups: PostalService) { }
 
   ngOnInit() {
     this.getPosts();
@@ -45,6 +47,15 @@ export class ViewPostComponent implements OnInit {
     this.ups.createPost(newPost).subscribe(res =>
       this.Posts.push(newPost),
       err => console.log(err))
+    this.refreshComponent();
+  }
+
+  goBackHome(){
+    this.router.navigate(['']);
+  }
+  refreshComponent(){
+    window.location.reload();
   }
 
 }
+

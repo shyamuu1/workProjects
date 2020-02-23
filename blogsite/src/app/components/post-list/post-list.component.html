@@ -1,1 +1,12 @@
-<p *ngFor="let post of Posts">{{post.title}}</p>
+<div class="container py-md-5 container--narrow">
+    <div class="d-flex justify-content-between">
+        <li *ngFor="let post of Posts">
+            <a [routerLink]="['/create']">
+                <span class="badge">{{post.authorId}}</span> {{post.title}}
+            </a>
+        </li>
+        <!-- <form class="delete-post-form d-inline" action="/post/<%= post._id %>/delete" method="POST">
+      <button class="delete-post-button text-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
+    </form> -->
+    </div>
+</div>
