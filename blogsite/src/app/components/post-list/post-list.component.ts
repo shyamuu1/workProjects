@@ -13,7 +13,7 @@ export class PostListComponent implements OnInit {
   Posts:PostModel[];
   private subscription:Subscription;
 
-  constructor(private ups:PostalService, private router:Router) { }
+  constructor(private ups:PostalService) { }
 
   ngOnInit() {
     this.getPosts();
@@ -24,10 +24,6 @@ export class PostListComponent implements OnInit {
       posts => this.Posts = posts,
       error => console.log(error))
     console.table(this.Posts)
-  }
-
-  goToEditPage(){
-    this.router.navigate(['/create'])
   }
 
   ngOnDestroy(){

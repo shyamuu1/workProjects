@@ -21,11 +21,14 @@ public class PostService {
 		return this.repo.findAll();
 	}
 	
-	public void addCard(Post p) {
+	public void addPost(Post p) {
 		this.repo.save(p);
 	}
-	public Post findSingleById(long id) {
+	public Post findSingleById(Long id) {
 		return this.repo.getOne(id);
+	}
+	public void removePost(Long id) {
+		this.repo.deleteById(id);
 	}
 	
 }

@@ -1,0 +1,19 @@
+<p>edit-post works!</p>
+<div *ngIf="post">
+    <form>
+        <div>
+            <div class="form-group">
+                <label for="post-title" class="text-muted mb-1"><small>Title</small></label>
+                <input [(ngModel)]="post.title" name="title" required id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="post-body" class="text-muted mb-1"><small>Body Content</small></label>
+                <textarea [(ngModel)]="post.body" name="body" required class="body-content tall-textarea form-control" type="text">
+                </textarea>
+            </div>
+        </div>
+        <button type="submit" (click)="updatePost()" class="btn btn-primary">Update Post</button>
+        <button (click)="deletePost()" class="btn btn-primary">Delete</button>
+    </form>
+</div>

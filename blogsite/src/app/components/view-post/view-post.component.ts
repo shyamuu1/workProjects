@@ -3,6 +3,7 @@ import { PostModel } from 'src/app/models/post-model';
 import { PostalService } from 'src/app/services/postal.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./view-post.component.css']
 })
 export class ViewPostComponent implements OnInit {
-  mySubscription: any;
   Posts: PostModel[];
+  subscription:Subscription;
   form = new FormGroup({
     newerPost: new FormGroup({
       title: new FormControl(''),
@@ -23,15 +24,14 @@ export class ViewPostComponent implements OnInit {
   constructor(private router:Router, private ups: PostalService) { }
 
   ngOnInit() {
-    this.getPosts();
+    //this.getPosts();
   }
 
-  getPosts(): void {
-    this.ups.getPosts().subscribe(
-      posts => this.Posts = posts,
-      error => console.log(error))
-    console.table(this.Posts)
-  }
+  // getPosts(): void {
+  //   this.subscription = this.ups.getPosts().subscribe(
+  //     posts => this.Posts = posts,
+  //     error => console.log(error))
+  // }
   cleanUp(pendingPost:PostModel){
     if(typeof(pendingPost.title) != "string"){
       pendingPost.title = "";
@@ -44,18 +44,21 @@ export class ViewPostComponent implements OnInit {
     let nPost = this.form.value.newerPost;
     let newPost = new PostModel(nPost.title, nPost.body)
     this.cleanUp(newPost);
-    this.ups.createPost(newPost).subscribe(res =>
+    this.subscription = this.ups.createPost(newPost).subscribe(res =>
       this.Posts.push(newPost),
       err => console.log(err))
-    this.refreshComponent();
+    this.goBackHome();
   }
 
   goBackHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['', 'post.authorId']);
   }
-  refreshComponent(){
-    window.location.reload();
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
+  // refreshComponent(){
+  //   window.location.reload();
+  // }
 
 }
 

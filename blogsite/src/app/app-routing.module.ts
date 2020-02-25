@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
 import { ViewPostComponent } from './components/view-post/view-post.component';
 import { PostListComponent } from './components/post-list/post-list.component';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 
 
 const routes: Routes = [
   {path: "create", component: ViewPostComponent },
-  {path: "postlist", component: PostListComponent},
   {path: 'home', component: HomeComponent},
-  {path: "", redirectTo:"/home", pathMatch:"full"}
+  {path: "postlist", component: PostListComponent},
+  {path: 'edit/:id', component:EditPostComponent},
+  {path: "", redirectTo:"home", pathMatch:"full"}
 ];
 
 @NgModule({
