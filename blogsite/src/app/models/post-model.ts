@@ -5,9 +5,12 @@ export class PostModel {
     createdDate: Date;
 
     constructor( title, body){
-        //this.authorId = authorId;
         this.title = title;
         this.body =body;
 
+    }
+
+    getCreatedDate(){
+        return this.createdDate.toString();
     }
 }

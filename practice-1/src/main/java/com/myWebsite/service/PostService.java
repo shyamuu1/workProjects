@@ -1,5 +1,6 @@
 package com.myWebsite.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class PostService {
 	}
 	public void removePost(Long id) {
 		this.repo.deleteById(id);
+	}
+	public String getCurrentDate() {
+		return LocalDate.now().toString();
 	}
 	
 }

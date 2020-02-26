@@ -1,5 +1,7 @@
 package com.myWebsite.controllers;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +36,13 @@ public class PostController {
 	@RequestMapping(value="/{authorId}", method=RequestMethod.GET)
 	ResponseEntity<Post> getSinglePostById(@PathVariable("authorId") Long id) {
 		ResponseEntity<Post> resp = null;
+		String currentDate = this.ups.getCurrentDate();
 		Post p = this.ups.findSingleById(id);
+		
 		if(p == null) {
 			resp = new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}else {
+			p.setCreatedDate(currentDate);
 			resp = new ResponseEntity<>(p, HttpStatus.OK);
 		}
 		return resp;
@@ -45,7 +50,9 @@ public class PostController {
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	ResponseEntity<String> createPost(@RequestBody Post post){
 		ResponseEntity<String> resp = null;
+		String currentDate = this.ups.getCurrentDate();
 		try {
+			post.setCreatedDate(currentDate);
 			this.ups.addPost(post);
 			resp=  new ResponseEntity<>("Post Created Successfully", HttpStatus.OK);
 		}catch(Exception e) {
@@ -58,8 +65,9 @@ public class PostController {
 	ResponseEntity<String> updatePost(@PathVariable("id") Long id, @RequestBody Post post){
 		ResponseEntity<String> resp = null;
 			try {
+				String currentDate = this.ups.getCurrentDate();
 				Post p = this.ups.findSingleById(id);
-				p = new Post(post.getAuthorId(), post.getTitle(), post.getBody());
+				p = new Post(post.getAuthorId(), post.getTitle(), post.getBody(),currentDate);
 				this.ups.addPost(p);
 			}
 			catch(Exception e) {

@@ -1,9 +1,10 @@
-<div class="container py-md-5 container--narrow">
-    <div class="d-flex justify-content-between">
-        <li *ngFor="let post of Posts">
-            <a routerLink="/edit/{{post.authorId}}">
-                <span class="badge">{{post.authorId}}</span> {{post.title}}
-            </a>
-        </li>
-    </div>
+<div class="list-group">
+    <ul *ngFor="let post of Posts">
+        <a routerLink="/edit/{{post.authorId}}" class="list-group-item list-group-item-action">
+            <strong>{{post.authorId}}</strong> {{post.title}}
+            <p class="text-muted small mb-4">
+                Posted on {{post.getCreatedDate}}
+            </p>
+        </a>
+    </ul>
 </div>

@@ -51,10 +51,7 @@ export class ViewPostComponent implements OnInit {
   }
 
   goBackHome(){
-    this.router.navigate(['', 'post.authorId']);
-  }
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
+    this.router.navigate(['']);
   }
   // refreshComponent(){
   //   window.location.reload();

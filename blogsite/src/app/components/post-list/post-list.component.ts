@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class PostListComponent implements OnInit {
   Posts:PostModel[];
+  post:PostModel;
   private subscription:Subscription;
+  
 
   constructor(private ups:PostalService) { }
 
@@ -23,10 +25,9 @@ export class PostListComponent implements OnInit {
     this.subscription = this.ups.getPosts().subscribe(
       posts => this.Posts = posts,
       error => console.log(error))
-    console.table(this.Posts)
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy(){
+  //   this.subscription.unsubscribe();
+  // }
 }
