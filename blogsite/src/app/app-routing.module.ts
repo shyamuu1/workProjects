@@ -4,6 +4,7 @@ import { ViewPostComponent } from './components/view-post/view-post.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { HomeComponent } from './containers/home/home.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: "postlist", component: PostListComponent},
   {path: 'edit/:id', component:EditPostComponent},
-  {path: "", redirectTo:"home", pathMatch:"full"}
+  {path: 'login', component:LoginComponent},
+  {path: "", redirectTo:"login", pathMatch:"full"}
 ];
 
 @NgModule({

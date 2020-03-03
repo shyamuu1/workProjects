@@ -1,0 +1,17 @@
+<p>login works!</p>
+<form [formGroup]="registerform" (ngSubmit)="login()" class="mb-0 pt-2 pt-md-0">
+    <div class="row align-items-center">
+        <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
+            <input formControlName="username" class="form-control form-control-sm input-dark" type="text" placeholder="Username" autocomplete="off">
+        </div>
+        <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
+            <input formControlName="password" class="form-control form-control-sm input-dark" type="password" placeholder="Password">
+        </div>
+        <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
+            <input formControlName="email" type="email" class="form-control form-control-sm input-dark" type="email" placeholder="email">
+        </div>
+        <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary btn-sm">Login</button>
+        </div>
+    </div>
+</form>

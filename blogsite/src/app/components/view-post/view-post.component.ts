@@ -51,7 +51,7 @@ export class ViewPostComponent implements OnInit {
   }
 
   goBackHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   }
   // refreshComponent(){
   //   window.location.reload();

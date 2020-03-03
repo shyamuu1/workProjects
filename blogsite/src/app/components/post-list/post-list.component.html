@@ -1,10 +1,10 @@
 <div class="list-group">
     <ul *ngFor="let post of Posts">
         <a routerLink="/edit/{{post.authorId}}" class="list-group-item list-group-item-action">
-            <strong>{{post.authorId}}</strong> {{post.title}}
-            <p class="text-muted small mb-4">
+            <strong>{{post.title}}</strong> {{post.createdDate}}
+            <!-- <p class="text-muted small mb-4">
                 Posted on {{post.getCreatedDate}}
-            </p>
+            </p> -->
         </a>
     </ul>
 </div>

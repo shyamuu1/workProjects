@@ -85,7 +85,7 @@ public class PostController {
 			res = new ResponseEntity<>("Post Successfully Deleted", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
-			res = new ResponseEntity<>("Post was not updated", HttpStatus.BAD_REQUEST);
+			res = new ResponseEntity<>("Post was not deleted", HttpStatus.BAD_REQUEST);
 		}
 		return res;
 	}

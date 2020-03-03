@@ -10,6 +10,7 @@ import { HomeComponent } from './containers/home/home.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     EditPostComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

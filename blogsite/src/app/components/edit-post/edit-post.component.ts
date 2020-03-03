@@ -43,7 +43,7 @@ id:Number;
     this.goBackHome();
   }
   goBackHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   }
 
 }
